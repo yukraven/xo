@@ -2,3 +2,7 @@
 .idea/inspectionProfiles/
 
 .idea/
+
+token.conf
+
+*.pyc
