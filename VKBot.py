@@ -24,7 +24,7 @@ GM = GameMaster.GameMaster()
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.from_user and event.text:
         try:
-            result = GM.sendMessage(event.text, event.user_id)
+            result = GM.entryPoint(event.text, event.user_id)
             vk.messages.send(user_id=event.user_id, message=result, random_id=time.time())
         except Exception as e:
             vk.messages.send(user_id=event.user_id, message="Непредвиденная ошибка", random_id=time.time())

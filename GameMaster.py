@@ -1,5 +1,40 @@
 # coding: utf8
+from enum import Enum
+
+
+class Wait(Enum):
+    question = 1
+    any_question = 2
+    answer = 3
+
+
 class GameMaster:
+    """ Игровой клиент, отвечает за все взаимодействия с игрой """
+    hi_list = ["привет"]
+
+    state = Wait.answer
+    question = "Хочешь сыграть?"
+    question_owner = 0
+    answer = "да"
+    answer_owner = 0
+
+    return_dict = {Wait.answer: "Привет! Состояние - ожидаем ответ. Текущий вопрос - ",
+                   Wait.question: "Привет! Состояние - ожидаем вопрос от ответившего.",
+                   Wait.any_question: "Привет! Состояние - ожидаем вопрос от любого игрока."}
+
+    def entryPoint(self, text, user_id):
+        text = text.lower()
+        words_list = text.split(" ")
+
+        if words_list[0] in self.hi_list:
+            result = self.return_dict[self.state]
+            if self.state == Wait.answer:
+                result += self.question
+            return result
+
+
+
+    """
     state = "answerWaiting"
     question = "Хочешь сыграть?"
     questionOwner = 0
@@ -45,3 +80,4 @@ class GameMaster:
                     return "Неправильно записан вопрос. Напиши свои вопрос и ответ через троеточие (...)."
             else:
                 return "Другой человек задает вопрос. Жди."
+                """
